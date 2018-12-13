@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import connection from '../helpers/data/connection';
 import Auth from '../components/Auth/auth';
 import './App.scss';
