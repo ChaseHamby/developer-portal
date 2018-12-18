@@ -9,6 +9,7 @@ import CommitsData from '../components/CommitsData/commitsData';
 import MyNavbar from '../components/MyNavbar/myNavbar';
 import './App.scss';
 import authRequests from '../helpers/data/authRequests';
+import Tabs from '../components/Tabs/tabs';
 
 class App extends Component {
   state = {
@@ -58,6 +59,7 @@ class App extends Component {
         <Profile />
         <Tutorials />
         <CommitsData />
+        <Tabs />
       </div>
     );
   }
