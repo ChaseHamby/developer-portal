@@ -4,11 +4,12 @@ import 'firebase/auth';
 import connection from '../helpers/data/connection';
 import Auth from '../components/Auth/auth';
 import Profile from '../components/Profile/profile';
-import Tutorials from '../components/Tutorials/tutorials';
+// import Tutorials from '../components/Tutorials/tutorials';
 import CommitsData from '../components/CommitsData/commitsData';
 import MyNavbar from '../components/MyNavbar/myNavbar';
 import './App.scss';
 import authRequests from '../helpers/data/authRequests';
+import Tabs from '../components/Tabs/tabs';
 
 class App extends Component {
   state = {
@@ -56,8 +57,9 @@ class App extends Component {
       <div className="App">
         <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent}/>
         <Profile />
-        <Tutorials />
+        {/* <Tutorials /> */}
         <CommitsData />
+        <Tabs />
       </div>
     );
   }
