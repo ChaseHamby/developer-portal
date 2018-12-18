@@ -1,0 +1,44 @@
+{
+  "tutorials": {
+    "tutorial0": {
+      "name": "Intro to React",
+      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
+    },
+    "tutorial1": {
+      "name": "Intro to React",
+      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
+    },
+    "tutorial2": {
+      "name": "Intro to React",
+      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
+    },
+    "tutorial3": {
+      "name": "Intro to React",
+      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
+    },
+    "tutorial4": {
+      "name": "Intro to React",
+      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
+    },
+    "tutorial5": {
+      "name": "Intro to React",
+      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
+    },
+    "tutorial6": {
+      "name": "Intro to React",
+      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
+    },
+    "tutorial7": {
+      "name": "Intro to React",
+      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
+      }
+    }
+  }
