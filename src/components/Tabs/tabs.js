@@ -13,6 +13,7 @@ import {
   Col,
 } from 'reactstrap';
 import classnames from 'classnames';
+import Tutorials from '../Tutorials/tutorials';
 import './tabs.scss';
 
 class Tabs extends React.Component {
@@ -75,6 +76,7 @@ class Tabs extends React.Component {
             <Row>
               <Col sm="12">
                 <h4>Put shit here</h4>
+                <Tutorials />
               </Col>
             </Row>
           </TabPane>
