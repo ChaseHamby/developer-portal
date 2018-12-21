@@ -7,10 +7,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Card,
-  Button,
-  CardTitle,
-  CardText,
   Row,
   Col,
 } from 'reactstrap';
@@ -19,12 +15,12 @@ import connection from '../helpers/data/connection';
 import Auth from '../components/Auth/auth';
 import Profile from '../components/Profile/profile';
 import Tutorials from '../components/Tutorials/tutorials';
+import Blogs from '../components/Blogs/blogs';
 // import CommitsData from '../components/CommitsData/commitsData';
 import MyNavbar from '../components/MyNavbar/myNavbar';
 import './App.scss';
 import authRequests from '../helpers/data/authRequests';
 import tutorialsRequests from '../helpers/data/tutorialsRequests';
-
 
 class App extends Component {
   state = {
@@ -147,7 +143,6 @@ class App extends Component {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
-                <h4>Put shit here</h4>
                 <Tutorials
                   tutorials={this.state.tutorials}
                   deleteSingleTutorial={this.deleteOne}
@@ -157,11 +152,12 @@ class App extends Component {
           </TabPane>
           <TabPane tabId="2">
             <Row>
-                <Card body>
-                  <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button>Go somewhere</Button>
-                </Card>
+                <Col sm='12'>
+                <Blogs
+                  blogs={this.state.blogs}
+                  deleteSingleBlog={this.deleteOne}
+                />
+                </Col>
             </Row>
           </TabPane>
           <TabPane tabId="3">
