@@ -21,11 +21,15 @@ import MyNavbar from '../components/MyNavbar/myNavbar';
 import './App.scss';
 import authRequests from '../helpers/data/authRequests';
 import tutorialsRequests from '../helpers/data/tutorialsRequests';
+import blogsRequests from '../helpers/data/blogsRequests';
 
 class App extends Component {
   state = {
     authed: false,
     tutorials: [],
+    blogs: [],
+    githubUserName: '',
+    githubAccessToken: '',
   }
 
   constructor(props) {
@@ -53,6 +57,24 @@ class App extends Component {
       })
       .catch(err => console.error('err getting tutorials', err));
 
+    blogsRequests.getRequest()
+      .then((blogs) => {
+        this.setState({ blogs });
+      })
+      .catch(error => console.error('err getting blogs', error));
+    
+    // podcastsRequests.getRequest()
+    //   .then((podcasts) => {
+    //     this.setState({ podcasts });
+    //   })
+    //   .catch(error => console.error(error));
+    
+    // resourcesRequests.getRequest()
+    //   .then((resources) => {
+    //     this.setState({ resources });
+    //   })
+    //   .catch(error => console.error(error));
+
     this.removeListener = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({
@@ -70,8 +92,12 @@ class App extends Component {
     this.removeListener();
   }
 
-  isAuthenticated = () => {
-    this.setState({ authed: true });
+  isAuthenticated = (userName, accessToken) => {
+    this.setState({
+      authed: true,
+      githubUserName: userName,
+      githubAccessToken: accessToken,
+    });
   }
 
   deleteOne = (tutorialId) => {
@@ -87,9 +113,14 @@ class App extends Component {
 
 
   render() {
+    const { githubUserName, githubAccessToken } = this.state;
     const logoutClickEvent = () => {
       authRequests.logoutUser();
-      this.setState({ authed: false });
+      this.setState({
+        authed: false,
+        gitHubUserName: '',
+        gitHubAccessToken: '',
+      });
     };
 
     if (!this.state.authed) {
@@ -103,7 +134,7 @@ class App extends Component {
     return (
       <div className="App">
         <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent}/>
-        <Profile />
+        <Profile githubUserName={githubUserName} githubAccessToken={githubAccessToken} />
         <div className="tabby">
         <Nav tabs>
           <NavItem>
