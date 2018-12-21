@@ -15,6 +15,7 @@ import connection from '../helpers/data/connection';
 import Auth from '../components/Auth/auth';
 import Profile from '../components/Profile/profile';
 import Tutorials from '../components/Tutorials/tutorials';
+import Podcasts from '../components/Podcasts/podcasts';
 import Blogs from '../components/Blogs/blogs';
 // import CommitsData from '../components/CommitsData/commitsData';
 import MyNavbar from '../components/MyNavbar/myNavbar';
@@ -22,6 +23,7 @@ import './App.scss';
 import authRequests from '../helpers/data/authRequests';
 import tutorialsRequests from '../helpers/data/tutorialsRequests';
 import blogsRequests from '../helpers/data/blogsRequests';
+import podcastsRequests from '../helpers/data/podcastsRequest';
 
 class App extends Component {
   state = {
@@ -63,11 +65,11 @@ class App extends Component {
       })
       .catch(error => console.error('err getting blogs', error));
     
-    // podcastsRequests.getRequest()
-    //   .then((podcasts) => {
-    //     this.setState({ podcasts });
-    //   })
-    //   .catch(error => console.error(error));
+    podcastsRequests.getRequest()
+      .then((podcasts) => {
+        this.setState({ podcasts });
+      })
+      .catch(error => console.error(error));
     
     // resourcesRequests.getRequest()
     //   .then((resources) => {
@@ -158,7 +160,7 @@ class App extends Component {
               className={classnames({ active: this.state.activeTab === '3' })}
               onClick={() => { this.toggle('3'); }}
             >
-              Resources
+              Podcasts
             </NavLink>
           </NavItem>
           <NavItem>
@@ -166,7 +168,7 @@ class App extends Component {
               className={classnames({ active: this.state.activeTab === '4' })}
               onClick={() => { this.toggle('4'); }}
             >
-              Podcasts
+              Resources
             </NavLink>
           </NavItem>
         </Nav>
@@ -194,7 +196,10 @@ class App extends Component {
           <TabPane tabId="3">
             <Row>
               <Col sm="12">
-                <h4>Other shit?</h4>
+              <Podcasts
+                  podcasts={this.state.podcasts}
+                  deleteSinglePodcast={this.deleteOne}
+              />
               </Col>
             </Row>
           </TabPane>
