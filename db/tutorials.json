@@ -5,13 +5,13 @@
       "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
     },
     "tutorial1": {
-      "name": "Intro to React",
-      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "name": "How to Brew",
+      "url": "https://www.homebrewersassociation.org/how-to-brew/",
       "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
     },
     "tutorial2": {
-      "name": "Intro to React",
-      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "name": "Making Moonshine",
+      "url": "https://www.instructables.com/id/How-to-make-moonshine/",
       "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
     },
     "tutorial3": {
@@ -28,15 +28,5 @@
       "name": "Intro to React",
       "url": "https://reactjs.org/tutorial/tutorial.html",
       "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
-    },
-    "tutorial6": {
-      "name": "Intro to React",
-      "url": "https://reactjs.org/tutorial/tutorial.html",
-      "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
-    },
-    "tutorial7": {
-      "name": "Intro to React",
-      "url": "https://reactjs.org/tutorial/tutorial.html",
-      "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
-      }
     }
+  }
