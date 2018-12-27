@@ -17,6 +17,7 @@ import Profile from '../components/Profile/profile';
 import Tutorials from '../components/Tutorials/tutorials';
 import Podcasts from '../components/Podcasts/podcasts';
 import Blogs from '../components/Blogs/blogs';
+import Resources from '../components/Resources/resources';
 // import CommitsData from '../components/CommitsData/commitsData';
 import MyNavbar from '../components/MyNavbar/myNavbar';
 import './App.scss';
@@ -24,12 +25,15 @@ import authRequests from '../helpers/data/authRequests';
 import tutorialsRequests from '../helpers/data/tutorialsRequests';
 import blogsRequests from '../helpers/data/blogsRequests';
 import podcastsRequests from '../helpers/data/podcastsRequest';
+import resourcesRequests from '../helpers/data/resourcesRequests';
 
 class App extends Component {
   state = {
     authed: false,
     tutorials: [],
     blogs: [],
+    podcasts: [],
+    resources: [],
     githubUserName: '',
     githubAccessToken: '',
   }
@@ -71,11 +75,11 @@ class App extends Component {
       })
       .catch(error => console.error(error));
     
-    // resourcesRequests.getRequest()
-    //   .then((resources) => {
-    //     this.setState({ resources });
-    //   })
-    //   .catch(error => console.error(error));
+    resourcesRequests.getRequest()
+      .then((resources) => {
+        this.setState({ resources });
+      })
+      .catch(error => console.error(error));
 
     this.removeListener = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -111,8 +115,40 @@ class App extends Component {
           });
       })
       .catch(err => console.error('error with delete single', err));
+  };
+
+  deleteTwo = (blogId) => {
+    blogsRequests.deleteBlog(blogId)
+      .then(() => {
+        blogsRequests.getRequest()
+          .then((blogs) => {
+            this.setState({ blogs });
+          });
+      })
+      .catch(err => console.error('error with delete single', err));
   }
 
+  deleteThree = (podcastId) => {
+    podcastsRequests.deletePodcast(podcastId)
+      .then(() => {
+        podcastsRequests.getRequest()
+          .then((podcasts) => {
+            this.setState({ podcasts });
+          });
+      })
+      .catch(err => console.error('error with delete single', err));
+  }
+
+  deleteFour = (resourceId) => {
+    resourcesRequests.deleteResource(resourceId)
+      .then(() => {
+        resourcesRequests.getRequest()
+          .then((resources) => {
+            this.setState({ resources });
+          });
+      })
+      .catch(err => console.error('error with delete single', err));
+  }
 
   render() {
     const { githubUserName, githubAccessToken } = this.state;
@@ -188,7 +224,7 @@ class App extends Component {
                 <Col sm='12'>
                 <Blogs
                   blogs={this.state.blogs}
-                  deleteSingleBlog={this.deleteOne}
+                  deleteSingleBlog={this.deleteTwo}
                 />
                 </Col>
             </Row>
@@ -198,7 +234,7 @@ class App extends Component {
               <Col sm="12">
               <Podcasts
                   podcasts={this.state.podcasts}
-                  deleteSinglePodcast={this.deleteOne}
+                  deleteSinglePodcast={this.deleteThree}
               />
               </Col>
             </Row>
@@ -206,7 +242,10 @@ class App extends Component {
           <TabPane tabId="4">
             <Row>
               <Col sm="12">
-                <h4>And again more shit</h4>
+              <Resources
+                  resources={this.state.resources}
+                  deleteSingleResource={this.deleteFour}
+              />
               </Col>
             </Row>
           </TabPane>
