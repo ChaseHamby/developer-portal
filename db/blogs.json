@@ -1,42 +1,37 @@
 {
     "blog0": {
-      "name": "What Blog?",
-      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "name": "A Trail Runner's Blog",
+      "url": "http://www.atrailrunnersblog.com/",
       "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
     },
     "blog1": {
-      "name": "What Blog?",
-      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "name": "Good Beer Hunting",
+      "url": "https://www.goodbeerhunting.com/",
       "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
     },
     "blog2": {
-      "name": "What Blog?",
-      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "name": "MMA Junkie",
+      "url": "https://mmajunkie.com/",
       "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
     },
     "blog3": {
-      "name": "What Blog?",
-      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "name": "Mile Posts",
+      "url": "http://www.mile-posts.com/",
       "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
     },
     "blog4": {
-      "name": "What Blog?",
-      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "name": "The Beer Connoisseur",
+      "url": "https://beerconnoisseur.com/blogs",
       "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
     },
     "blog5": {
-      "name": "What Blog?",
-      "url": "https://reactjs.org/tutorial/tutorial.html",
+      "name": "Sad and Useless",
+      "url": "https://www.sadanduseless.com/",
       "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
     },
     "blog6": {
       "name": "What Blog?",
       "url": "https://reactjs.org/tutorial/tutorial.html",
       "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
-    },
-    "blog7": {
-      "name": "What Blog?",
-      "url": "https://reactjs.org/tutorial/tutorial.html",
-      "uid": "8gvDLGJR9oXYie2PP1Nl39Y348G3"
-      }
     }
+  }
