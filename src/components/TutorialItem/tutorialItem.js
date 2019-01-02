@@ -8,7 +8,6 @@ class TutorialItem extends React.Component {
   static propTypes = {
     tutorial: tutorialShape,
     deleteSingleTutorial: PropTypes.func,
-    passTutorialToEdit: PropTypes.func,
   }
 
   deleteEvent = (e) => {
@@ -19,8 +18,8 @@ class TutorialItem extends React.Component {
 
   editEvent = (e) => {
     e.preventDefault();
-    const { passTutorialToEdit, tutorial } = this.props;
-    passTutorialToEdit(tutorial.id);
+    const { passListingToEdit, tutorial } = this.props;
+    passListingToEdit(tutorial.id);
   }
 
   tutorialClick = (e) => {

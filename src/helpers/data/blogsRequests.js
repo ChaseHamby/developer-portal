@@ -19,9 +19,15 @@ const getRequest = () => new Promise((resolve, reject) => {
     .catch(err => reject(err));
 });
 
+const postBlog = blog => axios.post(`${firebaseUrl}/blogs.json`, blog);
+
 const deleteBlog = blogId => axios.delete(`${firebaseUrl}/blogs/${blogId}.json`);
+
+const putRequest = (blogId, blog) => axios.put(`${firebaseUrl}/blogs/${blogId}.json`, blog);
 
 export default {
   getRequest,
+  postBlog,
   deleteBlog,
+  putRequest,
 };
