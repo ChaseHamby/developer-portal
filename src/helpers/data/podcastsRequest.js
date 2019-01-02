@@ -19,9 +19,15 @@ const getRequest = () => new Promise((resolve, reject) => {
     .catch(err => reject(err));
 });
 
+const postPodcast = podcast => axios.post(`${firebaseUrl}/podcasts.json`, podcast);
+
 const deletePodcast = podcastId => axios.delete(`${firebaseUrl}/podcasts/${podcastId}.json`);
+
+const putRequest = (podcastId, podcast) => axios.put(`${firebaseUrl}/podcasts/${podcastId}.json`, podcast);
 
 export default {
   getRequest,
+  postPodcast,
   deletePodcast,
+  putRequest,
 };

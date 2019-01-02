@@ -16,6 +16,12 @@ class PodcastItem extends React.Component {
     deleteSinglePodcast(podcast.id);
   }
 
+  podcastClick = (e) => {
+    e.stopPropagation();
+    const { podcast, onSelect } = this.props;
+    onSelect(podcast.id);
+  }
+
   render() {
     const { podcast } = this.props;
     const uid = authRequests.getCurrentUid();
@@ -35,7 +41,7 @@ class PodcastItem extends React.Component {
       return <span className="col-2"></span>;
     };
     return (
-      <li className="podcast-item text-center">
+      <li className="podcast-item text-center" onClick={this.podcastClick}>
       <span className="col">{podcast.name}</span>
       <span className="col-3"><a href={podcast.url}>Link</a></span>
       {makeButtons()}

@@ -16,6 +16,13 @@ class ResourceItem extends React.Component {
     deleteSingleResource(resource.id);
   }
 
+  resourceClick = (e) => {
+    e.stopPropagation();
+    const { resource, onSelect } = this.props;
+    onSelect(resource.id);
+  }
+
+
   render() {
     const { resource } = this.props;
     const uid = authRequests.getCurrentUid();
@@ -35,7 +42,7 @@ class ResourceItem extends React.Component {
       return <span className="col-2"></span>;
     };
     return (
-      <li className="resource-item text-center">
+      <li className="resource-item text-center" onClick={this.resourceClick}>
       <span className="col">{resource.name}</span>
       <span className="col-3"><a href={resource.url}>Link</a></span>
       {makeButtons()}

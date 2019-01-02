@@ -18,7 +18,7 @@ import Tutorials from '../components/Tutorials/tutorials';
 import Podcasts from '../components/Podcasts/podcasts';
 import Blogs from '../components/Blogs/blogs';
 import Resources from '../components/Resources/resources';
-import TutorialForm from '../components/TutorialForm/tutorialForm';
+import Form from '../components/Form/Form';
 import MyNavbar from '../components/MyNavbar/myNavbar';
 import './App.scss';
 import authRequests from '../helpers/data/authRequests';
@@ -39,12 +39,6 @@ class App extends Component {
     selectedTutorialId: '-1',
     githubUserName: '',
     githubAccessToken: '',
-  }
-
-  tutorialSelectEvent = (id) => {
-    this.setState({
-      selectedTutorialId: id,
-    });
   }
 
   constructor(props) {
@@ -115,30 +109,47 @@ class App extends Component {
     });
   }
 
-  formSubmitTutorial = (newTutorial) => {
-    const { isEditing, editId } = this.state;
-    if (isEditing) {
-      tutorialsRequests.putRequest(editId, newTutorial)
+  formSubmitEvent = (newListing, tab) => {
+    if (tab === 'tutorials') {
+      tutorialsRequests.postTutorial(newListing)
         .then(() => {
           tutorialsRequests.getRequest()
             .then((tutorials) => {
-              this.setState({ tutorials, isEditing: false, editId: '-1'});
-            })
+              this.setState({ tutorials });
+            });
         })
         .catch(err => console.error('error with tutorials post', err));
-    } else {
-      tutorialsRequests.postTutorial(newTutorial)
+    } else if (tab === 'blogs') {
+      blogsRequests.postBlog(newListing)
         .then(() => {
-          tutorialsRequests.getRequest()
-            .then((tutorials) => {
-              this.setStat({ tutorials });
+          blogsRequests.getRequest()
+            .then((blogs) => {
+              this.setStat({ blogs });
             });
         })
         .catch(err => console.error('error adding tutorial', err));
+    } else if (tab === 'podcasts') {
+      podcastsRequests.postPodcast(newListing)
+        .then(() => {
+          podcastsRequests.getRequest()
+            .then((podcasts) => {
+              this.setStat({ podcasts });
+            });
+        })
+        .catch(err => console.error('error adding tutorial', err));  
+    } else if (tab === 'resources') {
+      resourcesRequests.postResource(newListing)
+        .then(() => {
+          resourcesRequests.getRequest()
+            .then((resources) => {
+              this.setStat({ resources });
+            });
+        })
+        .catch(err => console.error('error adding tutorial', err));  
     }
   }
 
-  passTutorialToEdit = tutorialId => this.setState({ isEditing: true, editId: tutorialId });
+  passListingToEdit = tutorialId => this.setState({ isEditing: true, editId: tutorialId });
 
   deleteOne = (tutorialId) => {
     tutorialsRequests.deleteTutorial(tutorialId)
@@ -189,13 +200,9 @@ class App extends Component {
       githubUserName,
       githubAccessToken,
       authed,
-      tutorials,
       isEditing,
       editId,
-      selectedTutorialId,
     } = this.state;
-
-    // const selectedTutorial = tutorials.find(tutorial => tutorial.id === selectedTutorialId) || { nope: 'nope' };
 
     const logoutClickEvent = () => {
       authRequests.logoutUser();
@@ -206,10 +213,10 @@ class App extends Component {
       });
     };
 
-    if (!this.state.authed) {
+    if (!authed) {
       return (
         <div className="App">
-          <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent}/>
+          <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent}/>
           <Auth isAuthenticated={this.isAuthenticated}/>
         </div>
       );
@@ -218,7 +225,7 @@ class App extends Component {
       <div className="App">
         <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent}/>
         <Profile githubUserName={githubUserName} githubAccessToken={githubAccessToken} />
-        <TutorialForm
+        <Form
           onSubmit={this.formSubmitEvent}
           isEditing={isEditing}
           editId={editId}
@@ -264,7 +271,6 @@ class App extends Component {
               <Col sm="12">
                 <Tutorials
                   tutorials={this.state.tutorials}
-                  // tutorial={selectedTutorial}
                   deleteSingleTutorial={this.deleteOne}
                   passTutorialToEdit={this.passTutorialToEdit}
                   onTutorialSelect={this.tutorialSelectEvent}
