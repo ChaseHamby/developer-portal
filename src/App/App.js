@@ -110,7 +110,7 @@ class App extends Component {
   }
 
   formSubmitEvent = (newListing, tab) => {
-    if (tab === 'tutorials') {
+    if (tab === 'Tutorials') {
       tutorialsRequests.postTutorial(newListing)
         .then(() => {
           tutorialsRequests.getRequest()
@@ -119,7 +119,7 @@ class App extends Component {
             });
         })
         .catch(err => console.error('error with tutorials post', err));
-    } else if (tab === 'blogs') {
+    } else if (tab === 'Blogs') {
       blogsRequests.postBlog(newListing)
         .then(() => {
           blogsRequests.getRequest()
@@ -127,8 +127,8 @@ class App extends Component {
               this.setStat({ blogs });
             });
         })
-        .catch(err => console.error('error adding tutorial', err));
-    } else if (tab === 'podcasts') {
+        .catch(err => console.error('error adding blog', err));
+    } else if (tab === 'Podcasts') {
       podcastsRequests.postPodcast(newListing)
         .then(() => {
           podcastsRequests.getRequest()
@@ -136,8 +136,8 @@ class App extends Component {
               this.setStat({ podcasts });
             });
         })
-        .catch(err => console.error('error adding tutorial', err));  
-    } else if (tab === 'resources') {
+        .catch(err => console.error('error adding podcast', err));
+    } else if (tab === 'Resources') {
       resourcesRequests.postResource(newListing)
         .then(() => {
           resourcesRequests.getRequest()

@@ -98,24 +98,24 @@ class Form extends React.Component {
         </div>
         <div className="radio">
         <label>
-          <input type="radio" value="blog"
-            checked={this.state.selectedOption === 'blog'}
+          <input type="radio" value="blogs"
+            checked={this.state.selectedOption === 'blogs'}
             onChange={this.handleOptionChange} />
             Blogs
         </label>
         </div>
         <div className="radio">
         <label>
-          <input type="radio" value="podcast"
-            checked={this.state.selectedOption === 'podcast'}
+          <input type="radio" value="podcasts"
+            checked={this.state.selectedOption === 'podcasts'}
             onChange={this.handleOptionChange} />
             Podcasts
         </label>
         </div>
         <div className="radio">
         <label>
-          <input type="radio" value="resource"
-            checked={this.state.selectedOption === 'resource'}
+          <input type="radio" value="resources"
+            checked={this.state.selectedOption === 'resources'}
             onChange={this.handleOptionChange} />
             Resources
         </label>
