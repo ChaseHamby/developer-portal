@@ -18,7 +18,7 @@ import Tutorials from '../components/Tutorials/tutorials';
 import Podcasts from '../components/Podcasts/podcasts';
 import Blogs from '../components/Blogs/blogs';
 import Resources from '../components/Resources/resources';
-// import CommitsData from '../components/CommitsData/commitsData';
+import TutorialForm from '../components/TutorialForm/tutorialForm';
 import MyNavbar from '../components/MyNavbar/myNavbar';
 import './App.scss';
 import authRequests from '../helpers/data/authRequests';
@@ -34,8 +34,17 @@ class App extends Component {
     blogs: [],
     podcasts: [],
     resources: [],
+    isEditing: false,
+    editId: '-1',
+    selectedTutorialId: '-1',
     githubUserName: '',
     githubAccessToken: '',
+  }
+
+  tutorialSelectEvent = (id) => {
+    this.setState({
+      selectedTutorialId: id,
+    });
   }
 
   constructor(props) {
@@ -106,6 +115,31 @@ class App extends Component {
     });
   }
 
+  formSubmitTutorial = (newTutorial) => {
+    const { isEditing, editId } = this.state;
+    if (isEditing) {
+      tutorialsRequests.putRequest(editId, newTutorial)
+        .then(() => {
+          tutorialsRequests.getRequest()
+            .then((tutorials) => {
+              this.setState({ tutorials, isEditing: false, editId: '-1'});
+            })
+        })
+        .catch(err => console.error('error with tutorials post', err));
+    } else {
+      tutorialsRequests.postTutorial(newTutorial)
+        .then(() => {
+          tutorialsRequests.getRequest()
+            .then((tutorials) => {
+              this.setStat({ tutorials });
+            });
+        })
+        .catch(err => console.error('error adding tutorial', err));
+    }
+  }
+
+  passTutorialToEdit = tutorialId => this.setState({ isEditing: true, editId: tutorialId });
+
   deleteOne = (tutorialId) => {
     tutorialsRequests.deleteTutorial(tutorialId)
       .then(() => {
@@ -151,7 +185,18 @@ class App extends Component {
   }
 
   render() {
-    const { githubUserName, githubAccessToken } = this.state;
+    const { 
+      githubUserName,
+      githubAccessToken,
+      authed,
+      tutorials,
+      isEditing,
+      editId,
+      selectedTutorialId,
+    } = this.state;
+
+    // const selectedTutorial = tutorials.find(tutorial => tutorial.id === selectedTutorialId) || { nope: 'nope' };
+
     const logoutClickEvent = () => {
       authRequests.logoutUser();
       this.setState({
@@ -173,6 +218,11 @@ class App extends Component {
       <div className="App">
         <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent}/>
         <Profile githubUserName={githubUserName} githubAccessToken={githubAccessToken} />
+        <TutorialForm
+          onSubmit={this.formSubmitEvent}
+          isEditing={isEditing}
+          editId={editId}
+        />
         <div className="tabby">
         <Nav tabs>
           <NavItem>
@@ -214,7 +264,10 @@ class App extends Component {
               <Col sm="12">
                 <Tutorials
                   tutorials={this.state.tutorials}
+                  // tutorial={selectedTutorial}
                   deleteSingleTutorial={this.deleteOne}
+                  passTutorialToEdit={this.passTutorialToEdit}
+                  onTutorialSelect={this.tutorialSelectEvent}
                 />
               </Col>
             </Row>
