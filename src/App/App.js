@@ -36,7 +36,6 @@ class App extends Component {
     resources: [],
     isEditing: false,
     editId: '-1',
-    selectedTutorialId: '-1',
     githubUserName: '',
     githubAccessToken: '',
   }
@@ -124,7 +123,7 @@ class App extends Component {
         .then(() => {
           blogsRequests.getRequest()
             .then((blogs) => {
-              this.setStat({ blogs });
+              this.setState({ blogs });
             });
         })
         .catch(err => console.error('error adding blog', err));
@@ -133,7 +132,7 @@ class App extends Component {
         .then(() => {
           podcastsRequests.getRequest()
             .then((podcasts) => {
-              this.setStat({ podcasts });
+              this.setState({ podcasts });
             });
         })
         .catch(err => console.error('error adding podcast', err));
@@ -142,7 +141,7 @@ class App extends Component {
         .then(() => {
           resourcesRequests.getRequest()
             .then((resources) => {
-              this.setStat({ resources });
+              this.setState({ resources });
             });
         })
         .catch(err => console.error('error adding tutorial', err));  
