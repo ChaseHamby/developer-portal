@@ -1,14 +1,17 @@
+
 import axios from 'axios';
-import apiKeys from '../apiKeys';
 
-const githubApiUrl = apiKeys.githubApi.apiUrl;
+// const clientId = apiKeys.githubApi.client_id;
+// const clientSecret = apiKeys.githubApi.client_secret;
 
-const getUser = (userName, accessToken) => new Promise((resolve, reject) => {
-  axios.get(`${githubApiUrl}/user`, { headers: { Authorization: `token ${accessToken}` } })
-    .then((result) => {
-      resolve(result.data);
+const getUser = user => new Promise((resolve, reject) => {
+  axios.get('https://api.github.com/users/ChaseHamby')
+    .then((res) => {
+      resolve(res.data);
     })
-    .catch(error => reject(error));
+    .catch((err) => {
+      reject(err);
+    });
 });
 
-export default { getUser };
+export default getUser;

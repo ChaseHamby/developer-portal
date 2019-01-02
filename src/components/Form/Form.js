@@ -13,8 +13,6 @@ const defaultListing = {
 class Form extends React.Component {
   static propTypes = {
     onSubmit: PropTypes.func,
-    isEditing: PropTypes.bool,
-    editId: PropTypes.string,
   }
 
   state = {
@@ -48,17 +46,6 @@ class Form extends React.Component {
     onSubmit(myForm, myDist);
     this.setState({ newListing: defaultListing });
   }
-
-  // componentDidUpdate(prevProps) {
-  //   const { isEditing, editId } = this.props;
-  //   if (prevProps !== this.props && isEditing) {
-  //     tutorialsRequests.getSingleTutorial(editId)
-  //       .then((tutorial) => {
-  //         this.setState({ newTutorial: tutorial.data });
-  //       })
-  //       .catch(err => console.error('error with getSingleTutorial', err));
-  //   }
-  // }
 
   render() {
     const { newListing } = this.state;

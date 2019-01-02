@@ -16,12 +16,6 @@ class BlogItem extends React.Component {
     deleteSingleBlog(blog.id);
   }
 
-  editEvent = (e) => {
-    e.preventDefault();
-    const { passListingToEditBlog, blog } = this.props;
-    passListingToEditBlog(blog.id);
-  }
-
   blogClick = (e) => {
     e.stopPropagation();
     const { blog, onSelect } = this.props;
@@ -36,11 +30,6 @@ class BlogItem extends React.Component {
       if (blog.uid === uid) {
         return (
           <div>
-            <span className="col">
-              <button className="btn btn-default" onClick={this.editEvent}>
-                <i className="fas fa-pencil-alt"></i>
-              </button>
-            </span>
             <span className="col">
             <button className="btn btn-default" onClick={this.deleteEvent}>
                 <i className="fas fa-trash-alt"></i>

@@ -33,9 +33,12 @@
 
 .tabby {
   padding: 1%;
-  margin: 15%;
+  // margin: 15%;
+  margin-left: 35%;
+  margin-top: -10%;
+  margin-bottom: 2%;
   border: 3px solid black;
-  height: 100vh;
-  width: 200vh;
+  height: 600px;
+  width: 185vh;
   overflow: scroll;
 }

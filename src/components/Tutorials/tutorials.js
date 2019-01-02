@@ -8,14 +8,12 @@ class Tutorials extends React.Component {
   static propTypes = {
     tutorials: PropTypes.arrayOf(tutorialShape),
     deleteSingleTutorial: PropTypes.func,
-    passListingToEdit: PropTypes.func,
   }
 
   render() {
     const {
       tutorials,
       deleteSingleTutorial,
-      passListingToEdit,
     } = this.props;
     let tutorialsItemComponents = '';
     if (tutorials) {
@@ -24,7 +22,6 @@ class Tutorials extends React.Component {
         tutorial={tutorial}
         key={tutorial.id}
         deleteSingleTutorial={deleteSingleTutorial}
-        passListingToEdit={passListingToEdit}
       />
       ));
     }

@@ -8,19 +8,12 @@ class PodcastItem extends React.Component {
   static propTypes = {
     podcast: podcastShape,
     deleteSinglePodcast: PropTypes.func,
-    passListingToEdit: PropTypes.func,
   }
 
   deleteEvent = (e) => {
     e.preventDefault();
     const { deleteSinglePodcast, podcast } = this.props;
     deleteSinglePodcast(podcast.id);
-  }
-
-  editEvent = (e) => {
-    e.preventDefault();
-    const { passListingToEdit, podcast } = this.props;
-    passListingToEdit(podcast.id);
   }
 
   podcastClick = (e) => {
@@ -37,11 +30,6 @@ class PodcastItem extends React.Component {
       if (podcast.uid === uid) {
         return (
           <div>
-            <span className="col">
-              <button className="btn btn-default" onClick={this.editEvent}>
-                <i className="fas fa-pencil-alt"></i>
-              </button>
-            </span>
             <span className="col">
             <button className="btn btn-default" onClick={this.deleteEvent}>
                 <i className="fas fa-trash-alt"></i>
