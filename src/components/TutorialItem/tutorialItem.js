@@ -16,12 +16,6 @@ class TutorialItem extends React.Component {
     deleteSingleTutorial(tutorial.id);
   }
 
-  editEvent = (e) => {
-    e.preventDefault();
-    const { passListingToEdit, tutorial } = this.props;
-    passListingToEdit(tutorial.id);
-  }
-
   tutorialClick = (e) => {
     e.stopPropagation();
     const { tutorial, onSelect } = this.props;
@@ -36,11 +30,6 @@ class TutorialItem extends React.Component {
       if (tutorial.uid === uid) {
         return (
           <div>
-            <span className="col">
-              <button className="btn btn-default" onClick={this.editEvent}>
-                <i className="fas fa-pencil-alt"></i>
-              </button>
-            </span>
             <span className="col">
             <button className="btn btn-default" onClick={this.deleteEvent}>
                 <i className="fas fa-trash-alt"></i>

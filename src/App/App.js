@@ -20,6 +20,7 @@ import Blogs from '../components/Blogs/blogs';
 import Resources from '../components/Resources/resources';
 import Form from '../components/Form/Form';
 import MyNavbar from '../components/MyNavbar/myNavbar';
+import getUser from '../helpers/data/githubRequests';
 import './App.scss';
 import authRequests from '../helpers/data/authRequests';
 import tutorialsRequests from '../helpers/data/tutorialsRequests';
@@ -34,10 +35,6 @@ class App extends Component {
     blogs: [],
     podcasts: [],
     resources: [],
-    isEditing: false,
-    editId: '-1',
-    githubUserName: '',
-    githubAccessToken: '',
   }
 
   constructor(props) {
@@ -85,13 +82,11 @@ class App extends Component {
 
     this.removeListener = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({
-          authed: true,
-        });
-      } else {
-        this.setState({
-          authed: false,
-        });
+        getUser(user)
+          .then((profile) => {
+            this.setState({ profile, authed: true });
+          })
+          .catch(err => console.error('err getting user', err));
       }
     });
   }
@@ -100,11 +95,9 @@ class App extends Component {
     this.removeListener();
   }
 
-  isAuthenticated = (userName, accessToken) => {
+  isAuthenticated = () => {
     this.setState({
       authed: true,
-      githubUserName: userName,
-      githubAccessToken: accessToken,
     });
   }
 
@@ -147,8 +140,6 @@ class App extends Component {
         .catch(err => console.error('error adding tutorial', err));  
     }
   }
-
-  passListingToEdit = tutorialId => this.setState({ isEditing: true, editId: tutorialId });
 
   deleteOne = (tutorialId) => {
     tutorialsRequests.deleteTutorial(tutorialId)
@@ -195,12 +186,8 @@ class App extends Component {
   }
 
   render() {
-    const { 
-      githubUserName,
-      githubAccessToken,
+    const {
       authed,
-      isEditing,
-      editId,
     } = this.state;
 
     const logoutClickEvent = () => {
@@ -223,11 +210,9 @@ class App extends Component {
     return (
       <div className="App">
         <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent}/>
-        <Profile githubUserName={githubUserName} githubAccessToken={githubAccessToken} />
+        <Profile profile={this.state.profile} />
         <Form
           onSubmit={this.formSubmitEvent}
-          isEditing={isEditing}
-          editId={editId}
         />
         <div className="tabby">
         <Nav tabs>
@@ -271,7 +256,6 @@ class App extends Component {
                 <Tutorials
                   tutorials={this.state.tutorials}
                   deleteSingleTutorial={this.deleteOne}
-                  passTutorialToEdit={this.passTutorialToEdit}
                   onTutorialSelect={this.tutorialSelectEvent}
                 />
               </Col>
