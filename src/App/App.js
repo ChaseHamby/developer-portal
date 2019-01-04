@@ -20,7 +20,7 @@ import Blogs from '../components/Blogs/blogs';
 import Resources from '../components/Resources/resources';
 import Form from '../components/Form/Form';
 import MyNavbar from '../components/MyNavbar/myNavbar';
-import getUser from '../helpers/data/githubRequests';
+import githubData from '../helpers/data/githubRequests';
 import './App.scss';
 import authRequests from '../helpers/data/authRequests';
 import tutorialsRequests from '../helpers/data/tutorialsRequests';
@@ -54,8 +54,37 @@ class App extends Component {
     }
   }
 
+  getGithubData = (users, gitHubTokenStorage) => {
+    githubData.getUser(gitHubTokenStorage)
+      .then((profile) => {
+        this.setState({ profile });
+      });
+    githubData.getUserEvents(users, gitHubTokenStorage)
+      .then((commitCount) => {
+        this.setState({ commitCount });
+      })
+      .catch(err => console.error('error with github user events GET', err));
+  }
+
   componentDidMount() {
     connection();
+    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const users = sessionStorage.getItem('githubUsername');
+        const gitHubTokenStorage = sessionStorage.getItem('githubToken');
+        this.getGithubData(users, gitHubTokenStorage);
+        // this.setState({
+        //   authed: true,
+        //   // githubUsername: users,
+        //   // githubToken: gitHubTokenStorage,
+        // });
+      } else {
+        this.setState({
+          authed: false,
+        });
+      }
+    });
+
     tutorialsRequests.getRequest()
       .then((tutorials) => {
         this.setState({ tutorials });
@@ -79,28 +108,22 @@ class App extends Component {
         this.setState({ resources });
       })
       .catch(error => console.error(error));
+  }
 
-    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        getUser(user)
-          .then((profile) => {
-            this.setState({ profile, authed: true });
-          })
-          .catch(err => console.error('err getting user', err));
-      }
+  isAuthenticated = (user, accessToken) => {
+    this.setState({
+      authed: true,
+      githubUsername: user,
+      githubToken: accessToken,
     });
+    sessionStorage.setItem('githubUsername', user);
+    sessionStorage.setItem('githubToken', accessToken);
   }
 
   componentWillUnmount() {
     this.removeListener();
   }
-
-  isAuthenticated = () => {
-    this.setState({
-      authed: true,
-    });
-  }
-
+  
   formSubmitEvent = (newListing, tab) => {
     if (tab === 'Tutorials') {
       tutorialsRequests.postTutorial(newListing)

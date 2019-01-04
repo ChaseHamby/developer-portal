@@ -4,7 +4,7 @@ import './profile.scss';
 
 class Profile extends React.Component {
   render() {
-    const { profile } = this.props;
+    const { profile, commitCount } = this.props;
 
     return (
       <div className="profile col">
@@ -17,8 +17,9 @@ class Profile extends React.Component {
           <a href={profile.html_url} className="_blank">https://github.com/ChaseHamby</a>
           <br/>
           <br/>
-          <h6> 12 Commits</h6>
-          <p>In the last 5 days</p>
+          {/* <h6> 12 Commits</h6>
+          <p>In the last 5 days</p> */}
+          <h4>{commitCount}</h4>
         </div>
         </div>
       </div>
