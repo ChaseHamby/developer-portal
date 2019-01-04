@@ -9,7 +9,6 @@ class Profile extends React.Component {
     return (
       <div className="profile col">
         <div className="profileWrap">
-        <h2>Profile</h2>
         <div className="card">
           <img className="img-fluid" src={profile.avatar_url} alt="github pic"></img>
           <p className="card-text">{profile.bio}</p>
