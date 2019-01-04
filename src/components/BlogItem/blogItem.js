@@ -16,12 +16,6 @@ class BlogItem extends React.Component {
     deleteSingleBlog(blog.id);
   }
 
-  blogClick = (e) => {
-    e.stopPropagation();
-    const { blog, onSelect } = this.props;
-    onSelect(blog.id);
-  }
-
   render() {
     const { blog } = this.props;
     const uid = authRequests.getCurrentUid();
@@ -41,7 +35,7 @@ class BlogItem extends React.Component {
       return <span className="col-2"></span>;
     };
     return (
-      <li className="blog-item text-center" onClick={this.blogClick}>
+      <li className="blog-item text-center">
       <span className="col">{blog.name}</span>
       <span className="col-3"><a href={blog.url}>Link</a></span>
       {makeButtons()}

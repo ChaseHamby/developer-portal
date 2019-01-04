@@ -16,12 +16,6 @@ class TutorialItem extends React.Component {
     deleteSingleTutorial(tutorial.id);
   }
 
-  tutorialClick = (e) => {
-    e.stopPropagation();
-    const { tutorial, onSelect } = this.props;
-    onSelect(tutorial.id);
-  }
-
   render() {
     const { tutorial } = this.props;
     const uid = authRequests.getCurrentUid();
@@ -41,7 +35,7 @@ class TutorialItem extends React.Component {
       return <span className="col-2"></span>;
     };
     return (
-      <li className="tutorial-item text-center" onClick={this.tutorialClick}>
+      <li className="tutorial-item text-center">
       <span className="col">{tutorial.name}</span>
       <span className="col-3"><a href={tutorial.url}>Link</a></span>
       {makeButtons()}
