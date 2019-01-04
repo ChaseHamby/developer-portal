@@ -1,0 +1,75 @@
+[debug] [2019-01-04T15:47:09.040Z] ----------------------------------------------------------------------
+[debug] [2019-01-04T15:47:09.043Z] Command:       /usr/local/Cellar/node/10.8.0/bin/node /usr/local/bin/firebase deploy --debug
+[debug] [2019-01-04T15:47:09.043Z] CLI Version:   6.1.2
+[debug] [2019-01-04T15:47:09.043Z] Platform:      darwin
+[debug] [2019-01-04T15:47:09.043Z] Node Version:  v10.8.0
+[debug] [2019-01-04T15:47:09.044Z] Time:          Fri Jan 04 2019 09:47:09 GMT-0600 (Central Standard Time)
+[debug] [2019-01-04T15:47:09.044Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-01-04T15:47:09.057Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-01-04T15:47:09.057Z] > authorizing via signed-in user
+[debug] [2019-01-04T15:47:09.057Z] [iam] checking project developer-portal-bba6d for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-01-04T15:47:09.059Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/developer-portal-bba6d:testIamPermissions  
+
+[debug] [2019-01-04T15:47:09.294Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-04T15:47:09.296Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/developer-portal-bba6d  
+ 
+[debug] [2019-01-04T15:47:09.471Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'developer-portal-bba6d'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-01-04T15:47:09.476Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/developer-portal-bba6d/versions  
+
+[debug] [2019-01-04T15:47:10.116Z] <<< HTTP RESPONSE 200
+[info] i  hosting[developer-portal-bba6d]: beginning deploy...
+[info] i  hosting[developer-portal-bba6d]: found 1 files in dist
+[debug] [2019-01-04T15:47:10.126Z] [hosting] hash cache [ZGlzdA] load error: lines is not defined
+[debug] [2019-01-04T15:47:10.133Z] [hosting] hash cache [ZGlzdA] stored for 1 files
+[debug] [2019-01-04T15:47:10.134Z] [hosting][hash queue][FINAL]
+[debug] [2019-01-04T15:47:10.134Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/developer-portal-bba6d/versions/5b61d0909503f2c0:populateFiles  
+ <request body omitted>
+[debug] [2019-01-04T15:47:10.426Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-04T15:47:10.426Z] [hosting][populate queue][FINAL]
+[debug] [2019-01-04T15:47:10.426Z] [hosting] uploads queued: 0
+[debug] [2019-01-04T15:47:10.427Z] [hosting][upload queue][FINAL]
+[info] ✔  hosting[developer-portal-bba6d]: file upload complete
+[debug] [2019-01-04T15:47:10.427Z] [hosting] deploy completed after 309ms
+[debug] [2019-01-04T15:47:10.517Z] [
+  {
+    "config": {
+      "public": "dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "developer-portal-bba6d"
+    },
+    "site": "developer-portal-bba6d",
+    "version": "sites/developer-portal-bba6d/versions/5b61d0909503f2c0"
+  }
+]
+[info] i  hosting[developer-portal-bba6d]: finalizing version...
+[debug] [2019-01-04T15:47:10.518Z] >>> HTTP REQUEST PATCH https://firebasehosting.googleapis.com/v1beta1/sites/developer-portal-bba6d/versions/5b61d0909503f2c0?updateMask=status  
+
+[debug] [2019-01-04T15:47:10.833Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-04T15:47:10.834Z] [hosting] finalized version for developer-portal-bba6d:
+[info] ✔  hosting[developer-portal-bba6d]: version finalized
+[info] i  hosting[developer-portal-bba6d]: releasing new version...
+[debug] [2019-01-04T15:47:10.835Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/developer-portal-bba6d/releases?version_name=sites/developer-portal-bba6d/versions/5b61d0909503f2c0  
+
+[debug] [2019-01-04T15:47:11.139Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-04T15:47:11.139Z] [hosting] release:
+[info] ✔  hosting[developer-portal-bba6d]: release complete
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/developer-portal-bba6d/overview
+[info] Hosting URL: https://developer-portal-bba6d.firebaseapp.com
