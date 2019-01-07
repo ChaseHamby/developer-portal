@@ -35,6 +35,9 @@ class App extends Component {
     blogs: [],
     podcasts: [],
     resources: [],
+    githubUsername: '',
+    githubToken: '',
+    commitCount: 0,
   }
 
   constructor(props) {
@@ -58,6 +61,7 @@ class App extends Component {
     githubData.getUser(gitHubTokenStorage)
       .then((profile) => {
         this.setState({ profile });
+        this.setState({ authed: true });
       });
     githubData.getUserEvents(users, gitHubTokenStorage)
       .then((commitCount) => {
@@ -68,22 +72,6 @@ class App extends Component {
 
   componentDidMount() {
     connection();
-    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        const users = sessionStorage.getItem('githubUsername');
-        const gitHubTokenStorage = sessionStorage.getItem('githubToken');
-        this.getGithubData(users, gitHubTokenStorage);
-        // this.setState({
-        //   authed: true,
-        //   // githubUsername: users,
-        //   // githubToken: gitHubTokenStorage,
-        // });
-      } else {
-        this.setState({
-          authed: false,
-        });
-      }
-    });
 
     tutorialsRequests.getRequest()
       .then((tutorials) => {
@@ -108,20 +96,36 @@ class App extends Component {
         this.setState({ resources });
       })
       .catch(error => console.error(error));
-  }
-
-  isAuthenticated = (user, accessToken) => {
-    this.setState({
-      authed: true,
-      githubUsername: user,
-      githubToken: accessToken,
+  
+    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const users = sessionStorage.getItem('githubUsername');
+        const gitHubTokenStorage = sessionStorage.getItem('githubToken');
+        this.setState({
+          // authed: true,
+          githubUsername: users,
+          githubToken: gitHubTokenStorage,
+        });
+      } else {
+        this.setState({
+          authed: false,
+        });
+      }
     });
-    sessionStorage.setItem('githubUsername', user);
-    sessionStorage.setItem('githubToken', accessToken);
-  }
+}
 
   componentWillUnmount() {
     this.removeListener();
+  }
+
+  isAuthenticated = (username, accessToken) => {
+    sessionStorage.setItem('githubUsername', username);
+    sessionStorage.setItem('githubToken', accessToken);
+    this.getGithubData(username, accessToken);
+    this.setState({
+      githubUsername: username,
+      githubToken: accessToken,
+    });
   }
   
   formSubmitEvent = (newListing, tab) => {
@@ -233,7 +237,7 @@ class App extends Component {
     return (
       <div className="App">
         <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent}/>
-        <Profile profile={this.state.profile} />
+        { authed && <Profile isAuthed={authed} profile={this.state.profile} commitCount={this.state.commitCount} /> }
         <Form
           onSubmit={this.formSubmitEvent}
         />

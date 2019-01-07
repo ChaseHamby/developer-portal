@@ -4,9 +4,10 @@ import './profile.scss';
 
 class Profile extends React.Component {
   render() {
-    const { profile, commitCount } = this.props;
+    const { profile, commitCount, isAuthed } = this.props;
 
-    return (
+    if (isAuthed) {
+      return (
       <div className="profile col">
         <div className="profileWrap">
         <div className="card">
@@ -16,13 +17,13 @@ class Profile extends React.Component {
           <a href={profile.html_url} className="_blank">https://github.com/ChaseHamby</a>
           <br/>
           <br/>
-          <h6> 12 Commits</h6>
-          <p>In the last 5 days</p>
           <h4>{commitCount}</h4>
+          <p>Commits in the last 5 days</p>
         </div>
         </div>
       </div>
-    );
+      );
+    }
   }
 }
 
